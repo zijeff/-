@@ -1,37 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-void create_account(char *filename,long long int b[]){
-    long long int number;
-    int cnt=0,i=0;
-    FILE *file,*tempfile;
-    char *tempfilename="temp.txt";
-    int changeline=0;
-    file = fopen (filename,"r");
-    while (fscanf(file,"%lld",&number)!=EOF)
-    {b[cnt++] = number;}
-    fclose(file);
-    for(i=0;i<10;i++){
-        if(b[i]==0){
-            changeline=i+1;
-            break;
-        }
-    }    
-    long long int new=0;
-    scanf("%lld",&new);
-    file=fopen(filename, "r");
-    tempfile = fopen(tempfilename, "w");
-    int currentline=1;
-    while (fscanf(file, "%lld", &number) != EOF){
-        if(currentline==changeline)
-        {fprintf(tempfile,"%lld\n",new);}
-        else {fprintf(tempfile,"%lld\n",number);}
-        currentline++;
-    }
-    fclose(file);
-    fclose(tempfile);
-    remove(filename);
-    rename(tempfilename,filename);
-}
+void create_account(char *filename,long long int b[]);
+void create_password(char *filename,char a[][101]);
 int main(){
     printf("欢迎使用学生成绩管理系统.\n");
     printf("本系统使用数字化菜单，请输入对应服务的数字，按回车以确定。\n");
@@ -41,6 +11,7 @@ int main(){
     printf("5.查看使用说明     6.退出系统\n");
     int index=0;
     long long int stu_idnum[100]={0},stu_phonenum[100]={0};
+    char password[100][101];
     scanf("%d",&index);
     switch(index)
     {
@@ -54,11 +25,67 @@ int main(){
         char temp2[]="stu_idnum.txt";
         create_account(temp2,stu_idnum);
         printf("\n");
-        printf("请输入您的密码：");
+        printf("请输入您的密码（为了确保密码的安全性，密码至少8位）：");
+        char temp3[]="password.txt";
+        create_password(temp3,password);
+        printf("账号创建成功，请牢记您的账号与密码。");
         break;
         case 6:
         return 0;
         break;
     }
     return 0;
+}
+void create_password(char *filename,char a[][101]){
+    int cnt=0,i=0;
+    int change=0;
+    char pass[101];
+    FILE *file,*tempfile;
+    char *tempfilename="temp.txt";
+    file = fopen (filename,"r");
+    while(fscanf(file,"%100s",pass)!=EOF)
+    {strcpy(a[cnt++],pass);}
+    for(i=0;i<100;i++){
+        if(strlen(a[i])==1){
+            change=i;
+            break;
+        }
+    }
+    char new[101];
+    scanf("%100s",new);
+    strcpy(a[change],new);
+    tempfile=fopen(tempfilename,"w");
+    for(i=0;i<100;i++)
+    {fprintf(tempfile,"%s\n",a[i]);}
+    fclose(tempfile);
+    fclose(file);
+    remove(filename);
+    rename(tempfilename,filename);
+}
+void create_account(char *filename,long long int b[]){
+    long long int number;
+    int cnt=0,i=0;
+    FILE *file,*tempfile;
+    char *tempfilename="temp.txt";
+    int change=0;
+    file = fopen (filename,"r");
+    while (fscanf(file,"%lld",&number)!=EOF)
+    {b[cnt++] = number;}
+    fclose(file);
+    for(i=0;i<100;i++){
+        if(b[i]==0){
+            change=i;
+            break;
+        }
+    }    
+    long long int new=0;
+    scanf("%lld",&new);
+    b[change]=new;
+    tempfile=fopen(tempfilename,"w");
+    for(i=0;i<100;i++)
+    {fprintf(tempfile,"%lld\n",b[i]);}
+    fclose(file);
+    fclose(tempfile);
+    remove(filename);
+    rename(tempfilename,filename);
 }
