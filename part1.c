@@ -2,13 +2,15 @@
 #include <string.h>
 void create_account(char *filename,long long int b[]);
 void create_password(char *filename,char a[][101]);
+void course_management(char *filename,char a[][101]);
 int main(){
-    printf("»¶Ó­Ê¹ÓÃÑ§Éú³É¼¨¹ÜÀíÏµÍ³.\n");
-    printf("±¾ÏµÍ³Ê¹ÓÃÊı×Ö»¯²Ëµ¥£¬ÇëÊäÈë¶ÔÓ¦·şÎñµÄÊı×Ö£¬°´»Ø³µÒÔÈ·¶¨¡£\n");
-    printf("----------Ñ§Éú¹ÜÀíÏµÍ³----------\n");
-    printf("1.Ñ§ÉúÕËºÅ×¢²á     2.ÏµÍ³ÓÃ»§µÇÂ¼\n");
-    printf("3.Íü¼ÇorĞŞ¸ÄÃÜÂë   4.ÕËºÅ²éÑ¯     \n");
-    printf("5.²é¿´Ê¹ÓÃËµÃ÷     6.ÍË³öÏµÍ³\n");
+    printf("æ¬¢è¿ä½¿ç”¨å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ.\n");
+    printf("æœ¬ç³»ç»Ÿä½¿ç”¨æ•°å­—åŒ–èœå•ï¼Œè¯·è¾“å…¥å¯¹åº”æœåŠ¡çš„æ•°å­—ï¼ŒæŒ‰å›è½¦ä»¥ç¡®å®šã€‚\n");
+    beginning:;
+    printf("----------å­¦ç”Ÿç®¡ç†ç³»ç»Ÿ----------\n");
+    printf("1.å­¦ç”Ÿè´¦å·æ³¨å†Œ     2.è¯¾ç¨‹ç®¡ç†\n");
+    printf("3.å¿˜è®°orä¿®æ”¹å¯†ç    4.è´¦å·æŸ¥è¯¢     \n");
+    printf("5.æŸ¥çœ‹ä½¿ç”¨è¯´æ˜     6.é€€å‡ºç³»ç»Ÿ\n");
     int index=0;
     long long int stu_idnum[100]={0},stu_phonenum[100]={0};
     char password[100][101];
@@ -16,25 +18,44 @@ int main(){
     switch(index)
     {
         case 1:
-        printf("------×¢²áÕËºÅ------\n");
-        printf("ÇëÊäÈëÄúµÄµç»°ºÅÂë£º");
+        printf("------æ³¨å†Œè´¦å·------\n");
+        printf("è¯·è¾“å…¥æ‚¨çš„ç”µè¯å·ç ï¼š");
         char temp1[]="stu_phonenum.txt";
         create_account(temp1,stu_phonenum);
         printf("\n");
-        printf("ÇëÊäÈëÄúµÄÑ§ºÅ£º");
+        printf("è¯·è¾“å…¥æ‚¨çš„å­¦å·ï¼š");
         char temp2[]="stu_idnum.txt";
         create_account(temp2,stu_idnum);
         printf("\n");
-        printf("ÇëÊäÈëÄúµÄÃÜÂë£¨ÎªÁËÈ·±£ÃÜÂëµÄ°²È«ĞÔ£¬ÃÜÂëÖÁÉÙ8Î»£©£º");
+        printf("è¯·è¾“å…¥æ‚¨çš„å¯†ç ï¼ˆä¸ºäº†ç¡®ä¿å¯†ç çš„å®‰å…¨æ€§ï¼Œå¯†ç è‡³å°‘8ä½ï¼‰ï¼š");
         char temp3[]="password.txt";
         create_password(temp3,password);
-        printf("ÕËºÅ´´½¨³É¹¦£¬ÇëÀÎ¼ÇÄúµÄÕËºÅÓëÃÜÂë¡£");
+        printf("è´¦å·åˆ›å»ºæˆåŠŸï¼Œè¯·ç‰¢è®°æ‚¨çš„è´¦å·ä¸å¯†ç ã€‚");
         break;
         case 6:
         return 0;
         break;
+        case2:
+          printf("------è¯¾ç¨‹ç®¡ç†------");
     }
+    printf("è¯·é—®æ˜¯å¦è¿˜éœ€è¦è¿›è¡Œå…¶ä»–æ“ä½œï¼Ÿ");
+    printf("éœ€è¦è¯·è¾“1ï¼Œä¸éœ€è¦è¯·è¾“å…¥2");
+    int j = 0;
+    scanf("%d",&j);
+    if (j==1){
+        goto beginning;
+    }
+    printf("æ„Ÿè°¢æ‚¨çš„ä½¿ç”¨ï¼Œå†è§ï¼");
     return 0;
+}
+
+void course_management(char *filename,char a[][101]){
+    int i=0;
+    FILE *file;
+    file = fopen (filename,"r");
+    while(fscanf(file,"%100s",a[i])!=EOF)
+    {i++;}
+    fclose(file);
 }
 void create_password(char *filename,char a[][101]){
     int cnt=0,i=0;
