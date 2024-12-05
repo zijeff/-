@@ -20,18 +20,18 @@ int main(){
     {
         case 1:
           printf("------注册账号------\n");
-          printf("请输入您的电话号码：");
+          printf("请输入您的电话号码：\n");
           char temp1[]="stu_phonenum.txt";
           create_account(temp1,stu_phonenum);
           printf("\n");
-          printf("请输入您的学号：");
+          printf("请输入您的学号：\n");
           char temp2[]="stu_idnum.txt";
           create_account(temp2,stu_idnum);
           printf("\n");
-          printf("请输入您的密码（为了确保密码的安全性，密码至少8位）：");
+          printf("请输入您的密码（为了确保密码的安全性，密码至少8位）：\n");
           char temp3[]="password.txt";
           create_password(temp3,password);
-          printf("账号创建成功，请牢记您的账号与密码。");
+          printf("账号创建成功，请牢记您的账号与密码。\n");
           break;
           case 6:
           return 0;
@@ -43,8 +43,8 @@ int main(){
           scanf("%d",&j1);
           course_management("course.txt",j1);
     }
-    printf("请问是否还需要进行其他操作？");
-    printf("需要请输1，不需要请输入2");
+    printf("请问是否还需要进行其他操作？\n");
+    printf("需要请输1，不需要请输入2\n");
     int j = 0;
     scanf("%d",&j);
     if (j==1){
@@ -66,10 +66,10 @@ int course_management(char *filename,int j1){
     switch(j1)
     {
         case 1:
-            printf("请输入您要修改的课程：");
+            printf("请输入您要修改的课程：\n");
             fgets(course_name,sizeof(course_name),stdin);
-            printf("请输入要修改的课程信息：依次输入课程名、简介、学院、学分、学时、选必修，并以空格隔开");
-            printf("如果不记得，可以输入1以回到查询菜单");
+            printf("请输入要修改的课程信息：依次输入课程名、简介、学院、学分、学时、选必修，并以空格隔开\n");
+            printf("如果不记得，可以输入1以回到查询菜单\n");
             fgets(content,sizeof(course_name),stdin);
             if (strcmp(content,"1")==0){
                 return 0;
@@ -84,7 +84,7 @@ int course_management(char *filename,int j1){
             fputs(buffer, fp_temp);
             }
         case 2:
-            printf("请输入您要查询的课程：");
+            printf("请输入您要查询的课程：\n");
             fgets(course_name,sizeof(course_name),stdin);
             while (fgets(buffer, sizeof(buffer), fp) != NULL) {
             buffer[strcspn(buffer, "\n")] = 0;
@@ -92,7 +92,7 @@ int course_management(char *filename,int j1){
             printf("%s", buffer);
             }
         case 3:
-            printf("请输入您要删除的课程：");
+            printf("请输入您要删除的课程：\n");
             fgets(course_name,sizeof(course_name),stdin);
             while (fgets(buffer, sizeof(buffer), fp) != NULL) {
             buffer[strcspn(buffer, "\n")] = 0;
@@ -102,10 +102,10 @@ int course_management(char *filename,int j1){
             }
         }
         case 4:
-            printf("请输入您要增加的课程：");
+            printf("请输入您要增加的课程：\n");
             fgets(course_name, sizeof(course_name), stdin);
             course_name[strcspn(course_name, "\n")] = 0; 
-            printf("请输入要增加的课程信息：依次输入课程名、简介、学院、学分、学时、选必修，并以空格隔开：");
+            printf("请输入要增加的课程信息：依次输入课程名、简介、学院、学分、学时、选必修，并以空格隔开：\n");
             fgets(content, sizeof(content), stdin);
             content[strcspn(content, "\n")] = 0; // 去除换行符
     // 完成对原文件的读取和临时文件的写入
